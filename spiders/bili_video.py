@@ -46,23 +46,6 @@ class BiliSpider(Spider):
             yield Request(item['url'] + '?vd_source=65aa9381fce2b80aa78e4f2be0b3e7c6', callback=self.parse_file,
                           meta={'item': item}, headers=headers)
 
-    # def parse_1(self, response):
-    #     self.logger.info('parse_1正在解析url:%s', response.url)
-    #     item = response.meta['item']
-    #     dic = json.loads(response.text)
-    #     list = dic['data']['list']
-    #     # url = 'https://www.bilibili.com/video/BV1kW4y117N6?vd_source=65aa9381fce2b80aa78e4f2be0b3e7c6'
-    #
-    #     for i in list:
-    #         item['title'] = i['title']
-    #         item['author'] = i['owner']['name']
-    #         item['coin'] = i['stat']['coin']
-    #         item['bvid'] = i['bvid']
-    #         item['dynamic'] = i['dynamic'].replace('\n', '')
-    #         item['url'] = self.base_url + '/video/' + item['bvid']
-    #         # yield Request('https://www.bilibili.com/video/BV1Xa411M7jF?vd_source=65aa9381fce2b80aa78e4f2be0b3e7c6', callback=self.parse_file,
-    #         #               meta={'item': item}, headers=headers)
-    #         yield Request(item['url']+'?vd_source=65aa9381fce2b80aa78e4f2be0b3e7c6', callback=self.parse_file, meta={'item': item},headers=headers)
 
     def parse_file(self, response):
         # self.page += 1
@@ -76,11 +59,4 @@ class BiliSpider(Spider):
         video['mp4_urls'] = video_url
         video['mp3_urls'] = audio_url
         yield video
-        # self.mp4_urls_list.append(video_url)
-        # self.mp3_urls_list.append(audio_url)
-        # if self.page < 190:
-        #     self.logger.info('page = %s, 继续收集视频链接',self.page)
-        # else:
-        #     item['mp4_urls'] = self.mp4_urls_list
-        #     item['mp3_urls'] = self.mp3_urls_list
-        #     yield item
+
